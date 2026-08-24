@@ -28,7 +28,7 @@ const groupBy = <T,>(
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" href={`${import.meta.env.BASE_URL}favicon.ico`} />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content="Views on Passion and Technology." />
@@ -77,7 +77,7 @@ const groupBy = <T,>(
                             )}
                           </time>
                           <a
-                            href={`/blog/${post.slug}`}
+                            href={`${import.meta.env.BASE_URL}blog/${post.slug}`}
                             class="hover:underline block mb-4 sm:mb-0"
                           >
                             <h3 class="font-semibold text-gray-900">
