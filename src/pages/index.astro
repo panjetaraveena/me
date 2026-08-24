@@ -1,0 +1,203 @@
+---
+import { Image } from "astro:assets";
+
+import Wave from "../components/Wave.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+
+import headshot from "../images/Raveena-transparent-bg.png";
+
+import iconInstagram from "../images/social-icons/instagram.svg";
+import iconLinkedIn from "../images/social-icons/linkedin.svg";
+import iconGithub from "../images/social-icons/github.svg";
+
+import logoShuffleBuddy from "../images/projects/logos/shuffle-buddy.png";
+
+import coverGraphingCalculator from "../images/projects/cover-images/graphing-calculator.png";
+import coverShuffleBuddy from "../images/projects/cover-images/shuffle-buddy.jpg";
+import coverThirdGradeMathGames from "../images/projects/cover-images/third-grade-math-games.jpg";
+
+const socialLinks = [
+  {
+    name: "Instagram",
+    url: "https://www.instagram.com/raveenapanjeta/",
+    icon: iconInstagram,
+  },
+  {
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/in/raveena-panjeta/",
+    icon: iconLinkedIn,
+  },
+  {
+    name: "Github",
+    url: "https://github.com/panjetaraveena",
+    icon: iconGithub,
+  },
+];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Raveena Panjeta</title>
+  </head>
+
+  <body>
+    <Nav current="home" wavy={false} />
+
+    <div class="bg-red-600 relative">
+      <div
+        class="max-w-2xl lg:max-w-4xl px-8 mx-auto pt-8 pb-16 lg:pt-24 lg:pb-32 relative"
+      >
+        <div class="text-center lg:text-left">
+          <div
+            class="size-32 relative sm:size-48 rounded-full bg-red-500 mx-auto overflow-hidden lg:bg-transparent lg:rounded-none lg:h-[96%] lg:aspect-square lg:w-auto lg:m-0 lg:absolute lg:bottom-0 lg:-right-20"
+          >
+            <Image
+              class="w-full h-full object-contain object-bottom"
+              src={headshot}
+              alt="Headshot of Raveena Panjeta"
+              loading="eager"
+            />
+          </div>
+
+          <h1 class="text-2xl sm:text-4xl text-red-300">
+            Hi! I'm Raveena Panjeta.
+          </h1>
+          <h2
+            class="text-4xl sm:text-7xl font-extrabold text-white whitespace-nowrap"
+          >
+            Passionate <span class="text-yellow-300">Full</span>
+            <br />
+            <span class="text-yellow-300">Stack</span> developer
+            <br />
+            & <span class="text-green-400">AI Enthusiast</span>.
+          </h2>
+          <ul class="mt-4 -mx-2">
+            {
+              socialLinks.map((link, i) => (
+                <li class="inline-block">
+                  <a
+                    href={link.url}
+                    class="group block p-2 text-red-400 hover:text-white"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <Image
+                      class:list={[
+                        "w-7 h-7 sm:w-8 sm:h-8 object-contain group-hover:brightness-200 group-hover:scale-110 transition-transform",
+                        {
+                          "group-hover:-rotate-6": i % 2 === 0,
+                          "group-hover:rotate-6": i % 2 === 1,
+                        },
+                      ]}
+                      loading="eager"
+                      src={link.icon}
+                      alt={`${link.name} logo`}
+                      title={link.name}
+                    />
+                    <span class="sr-only">{link.name}</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+
+      <Wave />
+    </div>
+
+    <div class="py-16 space-y-16">
+      <div>
+        <div class="max-w-2xl px-8 mx-auto">
+          <h2 class="text-3xl text-gray-800 text-center sm:text-left">
+            <span class="font-bold"
+              >The <span class="relative inline border-b-4 border-indigo-600"
+                >Spotlight</span
+              ></span
+            >
+            <span class="text-gray-400 iatlic hidden sm:inline"
+              >~ Highlighted Work</span
+            >
+          </h2>
+        </div>
+        <div
+          class="mt-8 max-w-6xl px-8 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 items-start"
+        >
+          <ProjectCard
+            title="Multiplayer Pong Game"
+            createdAt="Spring 2021"
+            url="https://github.com/panjetaraveena/multiplayer-pong"
+            logo={logoShuffleBuddy}
+            coverImage={coverShuffleBuddy}
+          >
+            Multiplayer pong client and server
+          </ProjectCard>
+        </div>
+      </div>
+      <div>
+        <div class="max-w-2xl px-8 mx-auto">
+          <h2 class="text-3xl text-gray-800 text-center sm:text-left">
+            <span class="font-bold"
+              >The <span class="relative inline border-b-4 border-indigo-600"
+                >Laboratory</span
+              ></span
+            >
+            <span class="text-gray-400 iatlic hidden sm:inline"
+              >~ Experiments In Progress</span
+            >
+          </h2>
+        </div>
+
+        <div class="mt-8 max-w-6xl px-8 mx-auto">
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 items-start"
+          >
+            <ProjectCard
+              title="OmniSearch AI"
+              createdAt="Summer 2026"
+              url="https://github.com/panjetaraveena/omnisearch_ai"
+              coverImage={coverGraphingCalculator}
+            >
+              An Enterprise-Grade Retrieval-Augmented Generation (RAG) & Hybrid Search Engine
+            </ProjectCard>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="max-w-2xl px-8 mx-auto">
+          <h2 class="text-3xl text-gray-800 text-center sm:text-left">
+            <span class="font-bold"
+              >The <span class="relative inline border-b-4 border-indigo-600"
+                >Museum</span
+              ></span
+            >
+            <span class="text-gray-400 iatlic hidden sm:inline"
+              >~ These Projects Made Me</span
+            >
+          </h2>
+        </div>
+
+        <div
+          class="mt-8 max-w-6xl px-8 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 items-start"
+        >
+          <ProjectCard
+            title="Raveena's NASA Project"
+            createdAt="Spring 2022"
+            url="https://github.com/panjetaraveena/nasa-project"
+            coverImage={coverThirdGradeMathGames}
+          >
+            NASA Mission Control Project
+          </ProjectCard>
+        </div>
+      </div>
+    </div>
+
+    <Footer />
+  </body>
+</html>

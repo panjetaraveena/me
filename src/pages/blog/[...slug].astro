@@ -1,0 +1,113 @@
+---
+import { getCollection } from "astro:content";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import InlineEmailSignupForm from "../../components/InlineEmailSignupForm.astro";
+import GoogleAnalytics from "../../components/GoogleAnalytics.astro";
+
+export async function getStaticPaths() {
+  const blogPosts = await getCollection("blog");
+  return blogPosts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const description =
+  post.data.description || "Views on Passion and Technology.";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={post.data.title} />
+    <meta property="og:type" content="article" />
+    <meta name="og:description" content={description} />
+    <meta
+      property="og:url"
+      content={`https://panjetaraveena.github.io/me//blog/${post.slug}`}
+    />
+    <meta property="og:image" content={`/open-graph/${post.slug}.png`} />
+    <title>{post.data.title} | Blog | Raveena Panjeta</title>
+    <GoogleAnalytics />
+    {
+      post.data.hasMath && (
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"
+        />
+      )
+    }
+  </head>
+
+  <body>
+    <div class="flex flex-col items-stretch min-h-screen">
+      <Nav current="blog" />
+
+      <main class="w-full max-w-2xl lg:max-w-3xl px-8 mx-auto my-16">
+        <a href="/blog" class="block text-indigo-700 hover:underline mb-6"
+          >← Raveena Panjeta's Blog</a
+        >
+
+        <article>
+          <time
+            class="text-gray-700 sm:text-xl"
+            datetime={new Date(post.data.date).toISOString()}
+          >
+            {
+              new Date(post.data.date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+            }
+          </time>
+          <h1
+            class="mb-6 mt-2 text-2xl sm:text-4xl font-bold leading-tight text-gray-900"
+          >
+            {post.data.title}
+          </h1>
+          <div
+            class="prose max-w-full prose-img:mx-auto prose-indigo sm:prose-lg prose-headings:text-base prose-headings:font-semibold prose-h1:text-xl sm:prose-h1:text-3xl prose-h2:text-lg sm:prose-h2:text-xl"
+          >
+            <Content />
+          </div>
+        </article>
+
+        <div class="mt-8">
+          <InlineEmailSignupForm />
+        </div>
+
+        <div>
+          <h2 class="font-bold text-2xl">Comments</h2>
+          <script 
+            is:inline
+            src="https://giscus.app/client.js"
+            data-repo="panjetaraveena/me"
+            data-repo-id="R_kgDOSpgy-g"
+            data-category="Blog Comments"
+            data-category-id="DIC_kwDOSpgy-s4DEDx2"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="bottom"
+            data-theme="preferred_color_scheme"
+            data-lang="en"
+            crossorigin="anonymous"
+            async>
+          </script>
+        </div>
+      </main>
+
+      <Footer />
+    </div>
+  </body>
+</html>
