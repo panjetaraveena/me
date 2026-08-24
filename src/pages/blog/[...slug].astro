@@ -23,7 +23,7 @@ const description =
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href={`${import.meta.env.BASE_URL}favicon.ico`} />
+    <link rel="icon" href={`${import.meta.env.BASE_URL.replace(/\/+$/, '')}/favicon.ico`} />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
@@ -52,7 +52,7 @@ const description =
       <Nav current="blog" />
 
       <main class="w-full max-w-2xl lg:max-w-3xl px-8 mx-auto my-16">
-        <a href={`${import.meta.env.BASE_URL}blog`} class="block text-indigo-700 hover:underline mb-6"
+        <a href={`${import.meta.env.BASE_URL.replace(/\/+$/, '')}/blog`} class="block text-indigo-700 hover:underline mb-6"
           >← Raveena Panjeta's Blog</a
         >
 

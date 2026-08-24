@@ -9,6 +9,7 @@ interface Props {
 }
 
 const { current, wavy = true, waveClassName = undefined } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/+$/, '');
 ---
 
 <header
@@ -18,16 +19,16 @@ const { current, wavy = true, waveClassName = undefined } = Astro.props;
     class="max-w-2xl px-8 py-6 mx-auto flex flex-col space-y-4 xxs:flex-row xxs:space-y-0 items-center justify-between"
   >
     <a
-      href={import.meta.env.BASE_URL}
+      href={`${base}/`}
       class="text-white text-xl font-medium underline decoration-transparent hover:decoration-green-400 decoration-wavy decoration-2 pb-1 -mb-1 underline-offset-4 hover:scale-110 hover:-rotate-3 transition-all"
     >
       Raveena Panjeta
     </a>
 
     <nav class="flex items-center space-x-4">
-      <NavLink href={import.meta.env.BASE_URL} selected={current === "home"}>Home</NavLink>
-      <NavLink href={`${import.meta.env.BASE_URL}about`} selected={current === "about"}>About Me</NavLink>
-      <NavLink href={`${import.meta.env.BASE_URL}blog`} selected={current === "blog"}>Blog</NavLink>
+      <NavLink href={`${base}/`} selected={current === "home"}>Home</NavLink>
+      <NavLink href={`${base}/about`} selected={current === "about"}>About Me</NavLink>
+      <NavLink href={`${base}/blog`} selected={current === "blog"}>Blog</NavLink>
     </nav>
   </div>
   {wavy && <Wave className={waveClassName} />}
